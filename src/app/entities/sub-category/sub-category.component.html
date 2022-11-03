@@ -1,0 +1,39 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">Subcategoria</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Subcategoria</h5>
+    <div class="my-2 text-left">
+      <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-primary" type="button" [routerLink]="['/formSubCategory']">
+        Crear Subcategoia
+      </button>
+    </div>
+    <div *ngIf = "subCategories?.length==0" class="alert alert-info">
+      No hay registros
+    </div>
+    <table class="table table-bordered table-striped" *ngIf = "subCategories?.length>0">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>descripcion</th>
+          <th *ngIf="authService.hasRole('ROLE_ADMIN')">
+            editar
+          </th>
+          <th *ngIf="authService.hasRole('ROLE_ADMIN')">eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subCategory of subCategories">
+          <td>{{ subCategory.id }}</td>
+          <td>{{ subCategory.description }}</td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+            <button type="button" name="editar" [routerLink]="['formSubCategory/', subCategory.id]" class="btn btn-primary btn-sm">editar</button>
+          </td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+            <button type="button" name="eliminar" (click)='delete(subCategory)' class="btn btn-danger btn-sm">eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

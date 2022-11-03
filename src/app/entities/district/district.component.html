@@ -1,0 +1,41 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">Distrito</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Distritos</h5>
+    <div class="my-2 text-left">
+      <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-primary" type="button" [routerLink]="['/formDistrict']">
+        Crear Distritos
+      </button>
+    </div>
+    <div *ngIf = "districts?.length==0" class="alert alert-info">
+      No hay registros
+    </div>
+    <table class="table table-bordered table-striped" *ngIf = "districts?.length>0">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>nombre</th>
+          <th>cantones</th>
+          <th *ngIf="authService.hasRole('ROLE_ADMIN')">
+            editar
+          </th>
+          <th *ngIf="authService.hasRole('ROLE_ADMIN')">eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let district of districts">
+          <td>{{ district.id }}</td>
+          <td>{{ district.districtName }}</td>
+            <td>{{ district.canton.name }}</td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+            <button type="button" name="editar" [routerLink]="['formDistrict/', district.id]" class="btn btn-primary btn-sm">editar</button>
+          </td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+            <button type="button" name="eliminar" (click)='delete(district)' class="btn btn-danger btn-sm">eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="card bg-dark text-white">
+  <div class="card-header">{{titulo}}</div>
+<div class="card-body">
+  <form>
+  <div class="form-group row">
+  </div>
+  <div class="form-group row">
+    <label for="name"class="col-form-label col-sm-2">Nombre</label>
+    <div class="col-sm-6">
+      <input type="text" name="nombre" class="form-control"  [(ngModel)]="place.placeName">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="name"class="col-form-label col-sm-2">Longitud</label>
+    <div class="col-sm-6">
+      <input type="text" name="longitud" class="form-control"  [(ngModel)]="place.longitude">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="name"class="col-form-label col-sm-2">Latitud</label>
+    <div class="col-sm-6">
+      <input type="text" name="latitud" class="form-control"  [(ngModel)]="place.latitude">
+    </div>
+  </div>
+  <div class="form-group row">
+      <label for="categoria" class="col-form-label col-sm-2">Categoria</label>
+      <div class="col-sm-6">
+        <select [compareWith]="compararCategorias" class="form-control" [(ngModel)]="place.category" name="categoria" style="width:500px;">
+          <option [ngValue]="undefined">--- selecionar una categoria ---</option>
+          <option *ngFor="let category of categories" [ngValue]="category">{{category.description}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+        <label for="provincia" class="col-form-label col-sm-2">Provincia</label>
+        <div class="col-sm-6">
+          <select [compareWith]="compararProvincia" class="form-control" [(ngModel)]="place.provincia" name="provincia" style="width:500px;">
+            <option [ngValue]="undefined">--- selecionar una provincia ---</option>
+            <option *ngFor="let province of provinces" [ngValue]="province">{{province.provinceName}}</option>
+          </select>
+        </div>
+      </div>
+  <div class="form-group row">
+      <label for="canton" class="col-form-label col-sm-2">Canton</label>
+      <div class="col-sm-6">
+        <select [compareWith]="compararCanton" class="form-control" [(ngModel)]="place.cantonPlace" name="canton" style="width:500px;">
+          <option [ngValue]="undefined">--- selecionar un canton ---</option>
+          <option *ngFor="let canton of cantons" [ngValue]="canton">{{canton.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+        <label for="distrito" class="col-form-label col-sm-2">Distrito</label>
+        <div class="col-sm-6">
+          <select [compareWith]="compararDistritos" class="form-control" [(ngModel)]="place.distrito" name="distrito" style="width:500px;">
+            <option [ngValue]="undefined">--- selecionar un distrito ---</option>
+            <option *ngFor="let district of districts" [ngValue]="district">{{district.districtName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="name"class="col-form-label col-sm-2">Historia</label>
+        <div class="col-sm-6">
+          <textarea name="history" rows="5" cols="80" class="form-control" [(ngModel)]="place.history"></textarea>          
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="name"class="col-form-label col-sm-2">Descripcion</label>
+        <div class="col-sm-6">
+          <textarea name="description" rows="5" cols="80" class="form-control" [(ngModel)]="place.description"></textarea>
+        </div>
+      </div>
+  <div class="form-group row">
+    <div class="col-sm-6">
+      <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!place.idPlace else elseBlock">Crear</button>
+
+        <ng-template #elseBlock>
+          <button class="btn btn-primary" role="button" (click)='update()'>Editar</button>
+        </ng-template>
+    </div>
+  </div>
+</form>
+</div>
+</div>
